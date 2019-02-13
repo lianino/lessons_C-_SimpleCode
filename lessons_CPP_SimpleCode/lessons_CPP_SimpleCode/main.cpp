@@ -24,12 +24,12 @@ private:
 	int x, y, z;
 };
 
-template<class T1>
+template<typename T>
 class TypeSize
 {
 public:
 
-	TypeSize(T1 value)
+	TypeSize(T value)
 	{
 		this->value = value;
 	}
@@ -39,40 +39,35 @@ public:
 		cout << "value " << sizeof(value) << endl;
 	}
 	
-private:
-	T1 value;
+protected:
+	T value;
 };
 
 
-template<class T1>
-class TypeInfo
+template<typename T>
+class TypeInfo : public TypeSize<T>
 {
 public:
-	TypeInfo(T1 value) : TypeSize(value)
+	TypeInfo(T value) : TypeSize(value)
 	{
 
 	}
-	
 
-private:
-	T1 value;
+	void ShowTypeName()
+	{
+		cout << "Название типа " << typeid(value).name() << endl;
+	}
 };
-
-
-
-
-
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
 
 	double var = 5.75;
-	TypeSize<double> typesize(var);
-	typesize.DataTypeSize();
 	
 	TypeInfo<double> typeinfo(var);
-	
+	typeinfo.DataTypeSize();
+	typeinfo.ShowTypeName();
 
 	system("pause");
 	return 0;
