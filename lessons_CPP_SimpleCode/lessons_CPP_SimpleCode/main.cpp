@@ -48,21 +48,20 @@ template<typename T>
 class TypeInfo : public TypeSize<T>
 {
 public:
-	TypeInfo(T value) : TypeSize(value)
+	TypeInfo(T value) : TypeSize<T>(value)
 	{
-
+		
 	}
 
 	void ShowTypeName()
 	{
-		cout << "Название типа " << typeid(value).name() << endl;
+		cout << "Название типа " << typeid(this->value).name() << endl;
 	}
 };
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
-
 	double var = 5.75;
 	
 	TypeInfo<double> typeinfo(var);
