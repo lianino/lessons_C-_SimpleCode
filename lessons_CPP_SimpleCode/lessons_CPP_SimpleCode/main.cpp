@@ -2,28 +2,33 @@
 #include<string>
 using namespace std;
 
-//специализация шаблонов класса
+//smart pointer
 
 template<typename T>
-class Printer
+class SmartPointer
 {
 public:
-
-	void Print(T value)
+	SmartPointer(T *ptr)
 	{
-		cout << value << endl;
+		this->ptr = ptr;
+		cout << "Constructor SmartPointer" << endl;
 	}
-};
 
-//Специализация шаблонов
-template<>
-class Printer<string>
-{
-public:
-	void Print(string value)
+	~SmartPointer()
 	{
-		cout << "***" << value << "***" << endl;
+		delete ptr;
+		cout << "Destructor SmartPointer" << endl;
 	}
+
+	T& operator*()
+	{
+		return *ptr;
+	}
+
+
+private:
+	T *ptr;
+
 };
 
 
@@ -31,10 +36,10 @@ int main()
 {
 	setlocale(LC_ALL, "ru");
 	
-	Printer<string> p;
-	p.Print("Hello World!");
-
+	SmartPointer<int> pointer = new int(5);
+	cout << *pointer << endl;
 
 	system("pause");
+
 	return 0;
 }
