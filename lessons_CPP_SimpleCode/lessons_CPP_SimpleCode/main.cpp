@@ -23,16 +23,38 @@ int main()
 
 	cout << "Capasity вектора " << myVector.capacity() << endl;// покажет кол-во элементов с запасом
 
-	/*myVector.pop_back();
+	myVector.shrink_to_fit(); // подчищает динамическую память, свободную.
 
+	cout << "myVector.shrink_to_fit()" << endl;
 	cout << "Количество элементов в векторе " << myVector.size() << endl;
+	cout << "Capasity вектора " << myVector.capacity() << endl;
+
+	vector<int> myVector2(10, 55); // (создание вектора с реальными ячейками 10, 55 значение которым заполняются все ячейки)
+
+	//myVector.pop_back();
+
+	cout << "Количество элементов в векторе " << myVector2.size() << endl;
 	
-	for (int i = 0; i < myVector.size(); i++)
+	for (int i = 0; i < myVector2.size(); i++)
 	{
-		cout << myVector[i] << endl;
+		cout << myVector2[i] << endl;
 	}
 
-	myVector.clear();*/
+	myVector.clear();
+	cout<< endl << myVector.empty() << endl;//проверка на пустоту, false 0 - это НЕ пустой
+	cout << myVector2.empty() << endl << endl;
+	myVector2.clear();
+
+	myVector2.resize(20,1000); // пересоздание списка
+
+	for (int i = 0; i < myVector2.size(); i++)
+	{
+		cout << myVector2[i] << endl;
+	}
+
+	//myVector2.insert(); вставка работают через итераторы
+	//myVector2.erase(); удаление
+
 	system("pause");
 	return 0;
 }
