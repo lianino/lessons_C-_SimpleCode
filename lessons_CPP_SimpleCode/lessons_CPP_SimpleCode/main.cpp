@@ -3,57 +3,68 @@
 using namespace std;
 
 //Библиотека стандартных шаблонов (STL)
-//VECTOR
+//VECTOR, итераторы
 
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
 
-	vector<int> myVector = {67,45,78,90};
-	myVector.reserve(15);
-	myVector.push_back(2);
-	myVector.push_back(44);
-	myVector.push_back(77);
-	myVector.push_back(9);
+	vector<int> myVector = {1,9,44,422,676,78};
 
-	//cout << myVector.at(1) << endl;// доступ к элементу вектора с проверкой границы массива вотличии от использования []
+	vector<int>::iterator it;
 
-	cout << "Количество элементов в векторе " << myVector.size() << endl;
+	it = myVector.begin(); //возвращает итератор начала вектора, первый элемент
 
-	cout << "Capasity вектора " << myVector.capacity() << endl;// покажет кол-во элементов с запасом
+	//*it = 1000; // изменение значение первого элемента, только через *
 
-	myVector.shrink_to_fit(); // подчищает динамическую память, свободную.
-
-	cout << "myVector.shrink_to_fit()" << endl;
-	cout << "Количество элементов в векторе " << myVector.size() << endl;
-	cout << "Capasity вектора " << myVector.capacity() << endl;
-
-	vector<int> myVector2(10, 55); // (создание вектора с реальными ячейками 10, 55 значение которым заполняются все ячейки)
-
-	//myVector.pop_back();
-
-	cout << "Количество элементов в векторе " << myVector2.size() << endl;
+	/*it++;
+	it += 2;
+	it--;
+	it -= 2;*/
 	
-	for (int i = 0; i < myVector2.size(); i++)
+	myVector.insert(it, 999); // добавление элемента
+
+	for (vector<int>::iterator i = myVector.begin(); i != myVector.end(); i++)
 	{
-		cout << myVector2[i] << endl;
+		cout << *i << endl;
 	}
+	cout << endl;
 
-	myVector.clear();
-	cout<< endl << myVector.empty() << endl;//проверка на пустоту, false 0 - это НЕ пустой
-	cout << myVector2.empty() << endl << endl;
-	myVector2.clear();
-
-	myVector2.resize(20,1000); // пересоздание списка
-
-	for (int i = 0; i < myVector2.size(); i++)
+	vector<int>::iterator itErase = myVector.begin();
+	/*myVector.erase(itErase);// удаление элемента  
+	
+	for (vector<int>::iterator i = myVector.begin(); i != myVector.end(); i++)
 	{
-		cout << myVector2[i] << endl;
+		cout << *i << endl;
 	}
+	cout << endl;*/
 
-	//myVector2.insert(); вставка работают через итераторы
-	//myVector2.erase(); удаление
+	myVector.erase(itErase, itErase + 3); //удаление диапазона
+
+	for (vector<int>::iterator i = myVector.begin(); i != myVector.end(); i++)
+	{
+		cout << *i << endl;
+	}
+	
+	//cout << *it << endl;
+
+	//advance(it, 3); // сдвиг итератора на 3
+
+
+	/*for (vector<int>::reverse_iterator i = myVector.rbegin(); i != myVector.rend(); i++)
+	{
+		cout << *i << endl;
+	}*/
+
+	//cout << myVector[1] << endl; // у вектора есть и итераторы и перегрузка []
+
+	/*int arr[] = { 2,6,9 };
+
+	cout << arr[1] << endl;
+
+	cout << *(arr + 1) << endl; // похоже на работу с итераторами, арифметика указателей*/
+	
 
 	system("pause");
 	return 0;
